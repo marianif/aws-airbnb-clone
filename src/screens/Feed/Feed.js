@@ -4,7 +4,7 @@ import { feed } from "../../assets/images/data/dummy-feed";
 import Post from "../../components/Post/Post";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Feed = () => {
+const FeedScreen = () => {
   return (
     <SafeAreaView style={{ width: "100%" }}>
       <FlatList
@@ -27,4 +27,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default FeedScreen;

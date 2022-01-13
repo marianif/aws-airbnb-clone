@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { searchResults } from "../../assets/images/data/dummy-search";
 import SearchResult from "../../components/SearchResult/SearchResult";
 
-const Search = () => {
+const SearchScreen = ({ navigation }) => {
   const [input, setInput] = useState("");
   return (
     <SafeAreaView style={styles.container}>
@@ -14,11 +14,16 @@ const Search = () => {
       <FlatList
         data={searchResults}
         renderItem={({ item }) => {
-          return <SearchResult description={item.description} />;
+          return (
+            <SearchResult
+              description={item.description}
+              navigation={navigation}
+            />
+          );
         }}
       />
     </SafeAreaView>
   );
 };
 
-export default Search;
+export default SearchScreen;

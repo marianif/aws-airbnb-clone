@@ -7,7 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 const image_uri =
   "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=683&q=80";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -15,7 +15,7 @@ const HomeScreen = () => {
           <View style={styles.searchContainer}>
             <Pressable
               style={styles.searchButton}
-              onPress={() => console.log("search button clicked")}
+              onPress={() => navigation.navigate("Search")}
             >
               <FontAwesome name="search" size={24} color="#FF5A60" />
               <Text style={styles.buttonText}>Find new places</Text>
