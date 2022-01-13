@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import ExploreStack from "./ExploreStack";
 import HomeScreen from "../screens/Home/HomeScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 
@@ -12,7 +13,7 @@ function HomeTab() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Home") {
+          if (route.name === "Landing") {
             iconName = focused ? "search" : "search";
           } else if (route.name === "Favorites") {
             iconName = focused ? "heart" : "heart";
@@ -32,8 +33,8 @@ function HomeTab() {
       })}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Landing"
+        component={ExploreStack}
         options={{
           headerShown: false,
           title: "Explore",
