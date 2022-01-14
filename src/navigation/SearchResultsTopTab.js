@@ -1,6 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FeedScreen from "../screens/Feed/Feed";
+import MapScreen from "../screens/Map/Map";
 
 const Tab = createMaterialTopTabNavigator();
 const SearchResultsTopTab = () => {
@@ -15,7 +16,7 @@ const SearchResultsTopTab = () => {
       />
       <Tab.Screen
         name="MapView"
-        component={FeedScreen}
+        component={MapScreen}
         options={{
           title: "Map",
         }}

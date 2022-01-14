@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, ScrollView } from "react-native";
-import { feed } from "../../assets/images/data/dummy-feed";
+import { feed } from "../../assets/data/dummy-feed";
 import Post from "../../components/Post/Post";
 import { SafeAreaView } from "react-native-safe-area-context";
 

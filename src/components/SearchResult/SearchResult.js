@@ -4,13 +4,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./SearchResultStyles";
 const SearchResult = ({ description, navigation }) => {
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() => navigation.navigate("Guests")}
-    >
+    <View style={styles.container}>
       <Ionicons name="location" size={24} color="black" />
       <Text style={styles.text}>{description}</Text>
-    </Pressable>
+    </View>
   );
 };
 
