@@ -4,31 +4,31 @@ import { Marker } from "react-native-maps";
 const CustomMarker = ({
   id,
   coordinates,
-  isSelected,
+  selectedPlace,
   price,
   setSelectedPlace,
   onPress,
 }) => {
+  let isSelected;
+  selectedPlace === id && isSelected === true;
   return (
-    <Pressable key={id} onPress={onPress}>
-      <Marker coordinate={coordinates}>
-        <View
+    <Marker coordinate={coordinates}>
+      <View
+        style={{
+          ...styles.markerContainer,
+          backgroundColor: isSelected ? "#FF5A60" : "white",
+        }}
+      >
+        <Text
           style={{
-            ...styles.markerContainer,
-            backgroundColor: isSelected ? "#FF5A60" : "white",
+            ...styles.markerText,
+            color: isSelected ? "white" : "#FF5A60",
           }}
         >
-          <Text
-            style={{
-              ...styles.markerText,
-              color: isSelected ? "white" : "#FF5A60",
-            }}
-          >
-            £{price}
-          </Text>
-        </View>
-      </Marker>
-    </Pressable>
+          £{price}
+        </Text>
+      </View>
+    </Marker>
   );
 };
 

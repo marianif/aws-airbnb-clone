@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  ScrollView,
+  Dimensions,
+  FlatList,
+} from "react-native";
 import MapView from "react-native-maps";
 import MapPost from "../../components/MapPost/MapPost";
 import { feed } from "../../assets/data/dummy-feed";
@@ -14,7 +21,8 @@ const initialRegion = {
 };
 
 const MapScreen = () => {
-  const [selectedPlace, setSelectedPlace] = useState("2");
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -24,18 +32,18 @@ const MapScreen = () => {
       >
         {feed.map((item, index) => {
           return (
-            <CustomMarker
-              key={item.id}
-              id={item.id}
-              coordinates={item.coordinate}
-              price={item.totalPrice}
-              isSelected={item.id === selectedPlace}
-              onPress={() => setSelectedPlace(item.id)}
-            />
+            <Pressable key={item.id} onPress={() => setSelectedPlace(item.id)}>
+              <CustomMarker
+                id={item.id}
+                coordinates={item.coordinate}
+                price={item.totalPrice}
+                selectedPlace={selectedPlace}
+              />
+            </Pressable>
           );
         })}
       </MapView>
-      <ScrollView
+      {/* <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         style={styles.carousel}
@@ -54,7 +62,28 @@ const MapScreen = () => {
             />
           );
         })}
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList
+        horizontal
+        snapToInterval={Dimensions.get("window").width - 60}
+        snapToAlignment="center"
+        style={styles.carousel}
+        data={feed}
+        renderItem={({ item }) => {
+          return (
+            <MapPost
+              key={item.id}
+              title={item.title}
+              oldPrice={item.oldPrice}
+              newPrice={item.newPrice}
+              finalPrice={item.finalPrice}
+              bedrooms={item.bedroom}
+              image={item.image}
+              bed={item.bed}
+            />
+          );
+        }}
+      />
     </View>
   );
 };

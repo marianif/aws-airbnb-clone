@@ -19,7 +19,7 @@ const MapPost = ({
   title,
 }) => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: image }} style={styles.image} />
@@ -35,7 +35,7 @@ const MapPost = ({
           <Text style={styles.newPrice}>£{newPrice} / Night</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

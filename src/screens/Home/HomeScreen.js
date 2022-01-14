@@ -22,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
             </Pressable>
           </View>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>New Adventures</Text>
+            <Text style={styles.title}>Go Everywhere!</Text>
             <Pressable
               style={styles.button}
               onPress={() => console.log("button clicked")}
