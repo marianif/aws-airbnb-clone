@@ -4,7 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./GuestsScreenStyles";
 import GuestsRow from "../../components/Guests/GuestsRow";
 
-const GuestsScreen = ({ navigation }) => {
+const GuestsScreen = ({ navigation, route }) => {
+  const { coordinates } = route.params;
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
@@ -21,6 +22,7 @@ const GuestsScreen = ({ navigation }) => {
         onPress={() =>
           navigation.navigate("Results", {
             guests: children + adults,
+            coordinates,
           })
         }
       >

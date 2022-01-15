@@ -7,14 +7,24 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listPosts } from "../../graphql/queries";
 
 const FeedScreen = ({ navigation, route }) => {
-  const { guests } = route.params;
+  const { guests, coordinates } = route.params;
+  console.log(coordinates);
   const [feed, setFeed] = useState([]);
   const getPostsList = async () => {
+    const { southwest, northeast } = coordinates;
     const response = await API.graphql(
       graphqlOperation(listPosts, {
         filter: {
-          maxGuests: {
-            ge: guests,
+          and: {
+            maxGuests: {
+              ge: guests,
+            },
+            latitude: {
+              between: [southwest.lat, northeast.lat],
+            },
+            longitude: {
+              between: [southwest.lng, northeast.lng],
+            },
           },
         },
       })

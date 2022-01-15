@@ -28,7 +28,14 @@ const SearchBar = ({ input, setInput, navigation }) => {
       <GooglePlacesAutocomplete
         placeholder="Search"
         onPress={(data, details = null) => {
-          navigation.navigate("Guests");
+          console.log(
+            // "DATA:" +
+            //   JSON.stringify(data) +
+            "DETAILS:" + JSON.stringify(details, null, 3)
+          );
+          navigation.navigate("Guests", {
+            coordinates: details.geometry.viewport,
+          });
         }}
         fetchDetails
         query={{
