@@ -9,9 +9,11 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 import MapPost from "../../components/MapPost/MapPost";
-import { feed } from "../../assets/data/dummy-feed";
+// import { feed } from "../../assets/data/dummy-feed";
 import CustomMarker from "../../components/Marker/CustomMarker";
 import { styles } from "./MapStyles";
+import { API, graphqlOperation } from "aws-amplify";
+import { listPosts } from "../../graphql/queries";
 
 const initialRegion = {
   latitude: 28.3279822,
@@ -22,6 +24,14 @@ const initialRegion = {
 
 const MapScreen = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await API.graphql(graphqlOperation(listPosts));
+      setPosts(response.data.listPosts.items);
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -30,13 +40,17 @@ const MapScreen = () => {
         initialRegion={initialRegion}
         // provider={PROVIDER_GOOGLE}
       >
-        {feed.map((item, index) => {
+        {posts.map((item, index) => {
+          const coordinate = {
+            latitude: item.latitude,
+            longitude: item.longitude,
+          };
           return (
             <Pressable key={item.id} onPress={() => setSelectedPlace(item.id)}>
               <CustomMarker
                 id={item.id}
-                coordinates={item.coordinate}
-                price={item.totalPrice}
+                coordinates={coordinate}
+                price={item.newPrice}
                 selectedPlace={selectedPlace}
               />
             </Pressable>
@@ -68,7 +82,7 @@ const MapScreen = () => {
         snapToInterval={Dimensions.get("window").width - 60}
         snapToAlignment="center"
         style={styles.carousel}
-        data={feed}
+        data={posts}
         renderItem={({ item }) => {
           return (
             <MapPost

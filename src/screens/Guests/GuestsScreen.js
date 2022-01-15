@@ -18,7 +18,11 @@ const GuestsScreen = ({ navigation }) => {
       </View>
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate("SearchResultsTab")}
+        onPress={() =>
+          navigation.navigate("Results", {
+            guests: children + adults,
+          })
+        }
       >
         <Text style={styles.search}>Search</Text>
       </Pressable>
